@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import HomePage from './pages/home/HomePage';
+import VizPage from './pages/viz/VizPage';
 import theme from './theme';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -11,6 +12,8 @@ ReactDOM.render(
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
     <Router>
+
+    <Route path="/viz" component={VizPage}/>
     <Route path="/" component={HomePage}/>
   </Router>
   </ThemeProvider>,

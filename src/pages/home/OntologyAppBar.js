@@ -4,8 +4,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { IconButton } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
   appBar:{
@@ -17,15 +20,19 @@ const useStyles = makeStyles(theme => ({
     fontSize:14,
     color:"#ffffff"
   },
+  menuIcon:{
+    color:"#373F41"
+  },
   menuItem:{
     fontFamily:"Muli",
     fontWeight:600,
     fontSize:14,
     color:theme.secondary
   },
-  menuButton: {
-    borderRadius:4,
-    marginRight: theme.spacing(1),
+  hamburgerButtonContainer: {
+    flexGrow: 1,
+    justifyContent: 'start',
+    paddingLeft: theme.spacing(1),
   },
   socialButton:{
     borderRadius:4,
@@ -44,16 +51,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function OntologyAppBar() {
+export default function OntologyAppBar(props) {
   const classes = useStyles();
 
   return (
     <div>
       <AppBar  className={classes.appBar} position="static">
         <Toolbar>
+        {props.menu ?
+          <div className={classes.hamburgerButtonContainer}>
+          <IconButton
+
+          children={<MenuIcon fontSize= 'large' className={classes.menuIcon}/>}
+          />
+          </div>
+          :
           <Typography color="textPrimary" className={classes.title}>
-            ONTOLOGY
-          </Typography>
+          ONTOLOGY
+          </Typography>}
           <Button
              variant="contained"
              color="default"
