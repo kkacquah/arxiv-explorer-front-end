@@ -18,7 +18,7 @@ const theme = createMuiTheme({
       main: '#3C64B1',
     },
     text: {
-      primary: "#3C64B1",
+      primary: "#373F41",
       secondary: "#373F41"
     },
     button: {
@@ -29,7 +29,8 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: '#e1e7f3'
+      default: '#e1e7f3',
+      paper:'#F4F5F4'
     },
   },
 

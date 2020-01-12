@@ -15,6 +15,7 @@ export default {
       mode: 'nearest',
       intersect: false
     },
+  maintainAspectRatio: false,
   scales: {
     xAxes: [{
       type: 'time',

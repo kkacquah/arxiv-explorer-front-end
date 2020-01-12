@@ -1,5 +1,5 @@
 import React from 'react';
-import OntologyAppBar from './OntologyAppBar'
+import OntologyAppBar from '../../components/OntologyAppBar'
 import HomeVisualizerPreview from './HomeVisualizerPreview'
 import LandingPageQueryField from './LandingPageQueryField'
 import { makeStyles } from '@material-ui/core/styles';

@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Input } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import OntologyButton from '../../components/OntologyButton'
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -61,13 +62,10 @@ export default function LandingPageQueryField() {
     </Typography>
     <div className={classes.queryInputContainer}>
     <TextField className={classes.textField} InputProps={{className: classes.input,color:"textSecondary",disableUnderline: true}}/>
-    <Button
-       variant="contained"
-       color="secondary"
-       className={classes.searchButton}
-        >
-       <Typography className={classes.searchButtonText}>Search</Typography>
-     </Button>
+    <OntologyButton
+       buttonText={"Search"}
+       color={"#3C64B1"}
+        />
     </div>
     </div>
   );
