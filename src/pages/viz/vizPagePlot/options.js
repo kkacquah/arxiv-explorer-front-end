@@ -1,13 +1,18 @@
-export default {
-  legend: {
-    display: false
-  },
-  elements: {
-    point: {
-      radius: 0
-    }
-  },
-  hover: {
+export default function getPlotOptions(plotState) {
+  console.log(plotState);
+  return ({
+    legend: {
+      display: false
+    },
+    elements: {
+      point: {
+        radius: 0
+      },
+      line: {
+        fill: plotState.stacked
+      }
+    },
+    hover: {
       mode: 'nearest',
       intersect: false
     },
@@ -15,20 +20,24 @@ export default {
       mode: 'nearest',
       intersect: false
     },
-  maintainAspectRatio: false,
-  scales: {
-    xAxes: [{
-      type: 'time',
-      gridLines: {
-        display: false
-      }
-    }],
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        type: 'time',
+        gridLines: {
+          display: false
+        }
+      }],
 
-    yAxes: [{
-      stacked: true,
-      gridLines: {
-        display: true
-      }
-    }]
-  }
+      yAxes: [{
+        stacked: plotState.stacked,
+        gridLines: {
+          display: true
+        },
+        ticks: {
+          suggestedMax:  plotState.stacked ? 100 : 50
+        }
+      }]
+    }
+  });
 }

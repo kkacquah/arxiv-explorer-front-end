@@ -7,6 +7,12 @@ import {
 import OntologyTitle from '../../components/OntologyTitle'
 import OntologySelectedMenu from '../../components/OntologySelectedMenu'
 import OntologyButton from '../../components/OntologyButton'
+import
+plotOptions
+from '../../utils/plotOptions';
+import {
+  useCookies
+} from 'react-cookie';
 
 const useStyles = makeStyles(theme => ({
   body: {
@@ -14,69 +20,50 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    height:"100%",
+    height: "100%",
     padding: 25,
     width: 250
   },
-  header:{
+  header: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
-  buttons:{
+  buttons: {
     display: "flex",
     width: "100%",
     flexDirection: "column"
   },
   title: {
     flexGrow: 1,
-    fontFamily:"Lato",
-    fontWeight:700,
-    fontSize:24,
-    marginBottom:10,
-    color:"#3C64B1"
+    fontFamily: "Lato",
+    fontWeight: 700,
+    fontSize: 24,
+    marginBottom: 10,
+    color: "#3C64B1"
   },
 
 }));
 
-
-const rangeOptions = [
-  'Past 3 Months',
-  'Past Year',
-  'Past Five Years',
-  'Past 10 Years',
-  '1994 - present'
-]
-
-const typeOptions = [
-  'Line Chart',
-  'Stacked Chart'
-]
-
-const categoryOptions = [
-  'Physics',
-  'Mathematics',
-  'Computer Science',
-  'Quantitative Biology',
-  'Quantitative Finance',
-  'Statistics',
-]
-
-export default function VizOptionsView() {
+export default function VizOptionsView(props) {
   const classes = useStyles();
   const [drawerState, toggleDrawerState] = useState(false);
 
+  const onSelectCategory = (categoryIndex) => props.onSelect('categoryIndex', categoryIndex)
+  const onSelectRange = (rangeIndex) => props.onSelect('rangeIndex', rangeIndex);
+  //when stacked is selected change the state of "stacked"
+  const onSelectType = (typeIndex) => props.onSelect('typeIndex', typeIndex);
   return (
     <div className={classes.body}>
     <div className={classes.header}>
     <OntologyTitle/>
-    <OntologySelectedMenu hintText={"Range"} options={rangeOptions}/>
-      <OntologySelectedMenu hintText={"Type"} options={typeOptions}/>
-        <OntologySelectedMenu hintText={"Category"} options={categoryOptions}/>
+    <OntologySelectedMenu index={props.rangeIndex} onSelect={onSelectRange} hintText={"Range"} options={plotOptions.RANGES}/>
+      <OntologySelectedMenu index={props.typeIndex} onSelect={onSelectType} hintText={"Type"} options={plotOptions.TYPES}/>
+        <OntologySelectedMenu index={props.categoryIndex} onSelect={onSelectRange} hintText={"Category"} options={plotOptions.CATEGORIES}/>
         </div>
         <div className={classes.buttons}>
         <OntologyButton color={"#3C64B1"} buttonText={"Share Link"}/>
-        <OntologyButton color={"#373F41"} buttonText={"Save Image"}/>
+        <OntologyButton color={"#373F41"} buttonText={"Save Image"} marginTop={10}/>
         </div>
       </div>
   );

@@ -76,8 +76,8 @@ export default function OntologyAppBar(props) {
            >
              <Typography color="textSecondary" className={classes.socialItem}>Follow</Typography>
            </Button>
-          <Button className={classes.menuButton}><Typography color="textSecondary" className={classes.menuItem}>Feedback</Typography></Button>
-          <Button className={classes.menuButton}><Typography color="textSecondary" className={classes.menuItem}>About</Typography></Button>
+          <Button ><Typography color="textSecondary" className={classes.menuItem}>Feedback</Typography></Button>
+          <Button ><Typography color="textSecondary" className={classes.menuItem}>About</Typography></Button>
         </Toolbar>
       </AppBar>
     </div>

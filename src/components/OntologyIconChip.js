@@ -1,0 +1,58 @@
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import {
+  IconButton
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import {
+  makeStyles
+} from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  chip: {
+
+    padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  closeIcon: {
+    color: "#ffffff",
+    fontSize: 16,
+  },
+  iconButton: {
+    padding: 2,
+    marginLeft: 4,
+  },
+  text: {
+    fontFamily: "Muli",
+    fontWeight: 600,
+    fontSize: 16,
+    paddingBottom: 1.5,
+    verticalAlign: "middle",
+    color: "#ffffff"
+  }
+}));
+
+export default function OntologyIconChip(props) {
+  const classes = useStyles();
+
+  return (
+    <Box
+     className={classes.chip}
+     size= 'large'
+     style= {{backgroundColor: props.color}}
+   >
+
+     <Typography className={classes.text}>{props.text}</Typography>
+     <IconButton
+     className={classes.iconButton}
+     onClick={props.onPressClose}
+     children={<CloseIcon className={classes.closeIcon}/>}
+     />
+
+   </Box>);
+}

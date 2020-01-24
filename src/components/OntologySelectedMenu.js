@@ -15,8 +15,15 @@ const useStyles = makeStyles(theme => ({
 
     padding:0
   },
+  paper:{
+    backgroundColor: 'transparent',
+    borderRadius: 0,
+  },
   menu: {
-    color: "#d8d8d8",
+    margin:0,
+    border: '1px solid #d8d8d8',
+    backgroundColor:'#F4F5F4',
+    overflowY:'hidden'
   },
   listItem: {
     padding:10,
@@ -47,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function OntologySelectedMenu(props) {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(props.index);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClickListItem = (event, index) => {
@@ -60,6 +67,7 @@ export default function OntologySelectedMenu(props) {
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
+    props.onSelect(index);
     setAnchorEl(null);
   };
 
@@ -89,13 +97,14 @@ export default function OntologySelectedMenu(props) {
       </List>
       <Menu
         id="lock-menu"
+        color='transparent'
         anchorEl={anchorEl}
         keepMounted
-        boxShadow={1}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        className={classes.menu}
+        PopoverClasses={{ paper: classes.paper }}
       >
+      <div className={classes.menu}>
         {props.options.map((option, index) => (
           <MenuItem
             key={option}
@@ -103,8 +112,10 @@ export default function OntologySelectedMenu(props) {
             onClick={event => handleMenuItemClick(event, index)}
           >
             {option}
+
           </MenuItem>
         ))}
+        </div>
       </Menu>
     </div>
   );

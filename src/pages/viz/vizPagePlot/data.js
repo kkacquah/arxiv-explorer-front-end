@@ -1,6 +1,5 @@
 export default {
-  labels: [
-    {
+  labels: [{
       name: "Neural Networks",
       color: "#3C64B1"
     },
@@ -20,7 +19,7 @@ export default {
       name: "Support Vector Machines",
       color: "#373F41"
     }
-    ],
+  ],
   data: {
     "Neural Networks": [{
         "y": 34,
@@ -829,3 +828,20 @@ export default {
     ]
   }
 }
+
+[{
+  label: "Markov Methods",
+  backgroundColor: "#373F41",
+  borderColor: "#373F41",
+  data: [
+    '{{repeat(40)}}',
+    {
+      y: '{{integer(20, 40)}}',
+      t: function(tags, index) {
+        return 682128000 + Math.floor(index * (1577222874 - 682128000) / 40);
+      }
+    }
+
+  ]
+
+}]

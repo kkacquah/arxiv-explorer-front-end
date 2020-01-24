@@ -1,0 +1,131 @@
+import React from 'react';
+import Box from '@material-ui/core/Box';
+import OntologyIconChip from './OntologyIconChip';
+import AddIcon from '@material-ui/icons/Add';
+import {
+  IconButton
+} from '@material-ui/core';
+import {
+  makeStyles
+} from '@material-ui/core/styles';
+import ContentEditable from "react-contenteditable";
+const useStyles = makeStyles(theme => ({
+  chip: {
+    padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#d8d8d8',
+    borderWidth: 1,
+
+  },
+  chipContainer: {
+    marginRight: 4,
+    marginTop: 2,
+    marginBottom: 2,
+  },
+
+  iconButton: {
+    padding: 2,
+    marginLeft: 4,
+  },
+  addIcon: {
+    color: "#d8d8d8",
+    fontSize: 16,
+  },
+
+  text: {
+    fontFamily: "Muli",
+    fontWeight: 600,
+    fontSize: 16,
+    minWidth: 10,
+    color: "#d8d8d8",
+    paddingBottom: 1.5,
+    verticalAlign: "middle",
+    border: '0 !important',
+    '&:click': {
+      border: '0 !important'
+    }
+  }
+}));
+
+
+
+const OntologyIconChipAdd = props => {
+  const classes = useStyles();
+  const [innerText, setInnerText] = React.useState("Add Topic");
+  const [focused, setFocused] = React.useState(false);
+
+  function useOutsideBlur(ref, onBlur) {
+    function handleClickOutside(event) {
+      if (focused && ref.current && !ref.current.contains(event.target)) {
+        onBlur();
+      }
+    }
+
+    React.useEffect(() => {
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    });
+  }
+
+  const handleChange = evt => {
+    setInnerText(evt.target.value);
+  };
+
+  const onFocus = evt => {
+    if (!focused) {
+      setInnerText("");
+      setFocused(true);
+    }
+  };
+
+  const onBlur = () => {
+    setFocused(false);
+  };
+
+  const onPressAdd = () => {
+    props.onAddLegendItem(innerText);
+  };
+
+  const chipRef = React.useRef(null);
+  useOutsideBlur(chipRef, onBlur);
+
+
+
+  //If text is specified, return an ontology chip component
+  //Other wise prompt a chip addition.
+  return (<div
+    className={classes.chipContainer}
+
+    >{
+    props.text ? <OntologyIconChip onPressClose={props.onRemoveLegendItem} color={props.color} text={props.text}/> :
+<Box
+     className={classes.chip}
+     size= 'large'
+     border={1}
+     ref={chipRef}
+     onClick={onFocus}
+   >
+       <ContentEditable
+      style={{outline: 'none'}}
+            html={focused ? innerText : "Add Topic"}
+             className={classes.text}
+             onChange={handleChange} // handle innerHTML change
+
+           />
+     <IconButton
+     className={classes.iconButton}
+     onClick={onPressAdd}
+     children={<AddIcon className={classes.addIcon}/>}
+     />
+
+   </Box>}</div>);
+};
+
+export default OntologyIconChipAdd

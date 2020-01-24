@@ -2,29 +2,17 @@ import React from 'react';
 import {
   makeStyles
 } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import {
-  FontAwesomeIcon
-} from '@fortawesome/react-fontawesome'
-import {
-  faTwitter
-} from '@fortawesome/free-brands-svg-icons'
-import {
-  faBars
-} from '@fortawesome/free-solid-svg-icons'
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import {
-  IconButton
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button'
 import MenuIcon from '@material-ui/icons/Menu';
+import {
+  useCookies
+} from 'react-cookie';
 
 const useStyles = makeStyles(theme => ({
   button: {
     color: theme.primary,
     flex: 1,
-    margin: theme.spacing(1),
     textPrimary: true
   },
   buttonText: {
@@ -41,8 +29,10 @@ export default function OntologyAppBar(props) {
   return (
     <Button
        variant="contained"
-       style={{backgroundColor:props.color}}
+       style={{backgroundColor:props.color, marginLeft: props.marginLeft
+       , marginTop: props.marginTop}}
        className={classes.button}
+       onClick = {props.onPress}
         >
        <Typography className={classes.buttonText}>{props.buttonText}</Typography>
      </Button>

@@ -1,8 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -25,14 +23,15 @@ const useStyles = makeStyles(theme => ({
 
 function LegendItems(props) {
   const classes = useStyles();
-  const legendItems = props.labels.map((label) =>
+  const legendItems = props.data.map((line) =>
   (<Button
      variant="contained"
      className={classes.legendItem}
      size= 'small'
-     style={{backgroundColor:label.color }}
+     key={line.label}
+     style={{backgroundColor:line.backgroundColor }}
    >
-     <Typography color="textSecondary" className={classes.legendText}>{label.name}</Typography>
+     <Typography color="textSecondary" className={classes.legendText}>{line.label}</Typography>
    </Button>)
   );
   return legendItems;
@@ -43,7 +42,7 @@ export default function VisualizerLegend(props) {
 
   return (
       <div className={classes.plotLegend}>
-      <LegendItems labels={props.labels} />
+      <LegendItems data={props.data} />
       </div>
       );
     }

@@ -52,9 +52,6 @@ const theme = createMuiTheme({
       root: {
         borderRadius: 0,
       },
-      MuiInput:{
-        color: "#373F41"
-      }
     }
   }
 });
