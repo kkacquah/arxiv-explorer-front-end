@@ -60,6 +60,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function VizPage(props) {
   let location = useLocation();
+  //forceUpdate react hook
+  const [, forceUpdate] = React.useReducer(x => x + 1, 0);
   //get initial state from routing
   const [labels, setLabels] = React.useState(new Map());
   const classes = useStyles();
@@ -150,7 +152,7 @@ export default function VizPage(props) {
     //if the change was in the type, we dont need to reload
     //datapoints, just rerender the state
     if (key == "type") {
-
+      forceUpdate();
     } else {
       loadDatapoints(query);
     }
