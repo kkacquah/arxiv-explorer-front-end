@@ -59,7 +59,7 @@ export default function VizOptionsView(props) {
     <OntologyTitle/>
     <OntologySelectedMenu index={props.rangeIndex} onSelect={onSelectRange} hintText={"Range"} options={plotOptions.RANGES}/>
       <OntologySelectedMenu index={props.typeIndex} onSelect={onSelectType} hintText={"Type"} options={plotOptions.TYPES}/>
-        <OntologySelectedMenu index={props.categoryIndex} onSelect={onSelectRange} hintText={"Category"} options={plotOptions.CATEGORIES}/>
+        <OntologySelectedMenu index={props.categoryIndex} onSelect={onSelectCategory} hintText={"Category"} options={plotOptions.CATEGORIES}/>
         </div>
         <div className={classes.buttons}>
         <OntologyButton color={"#3C64B1"} buttonText={"Share Link"}/>

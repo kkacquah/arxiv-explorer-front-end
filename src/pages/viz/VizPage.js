@@ -147,7 +147,13 @@ export default function VizPage(props) {
     //map point array keys to values
     let labelKeys = [...labels.keys()];
     query[key] = index;
-    loadDatapoints(query)
+    //if the change was in the type, we dont need to reload
+    //datapoints, just rerender the state
+    if (key == "type") {
+
+    } else {
+      loadDatapoints(query);
+    }
   }
 
   //remove label
@@ -162,7 +168,7 @@ export default function VizPage(props) {
           <div className={classes.body}>
             <VizPlot
               onError={onError} onAddLabel={onAddLabel}
-              plotState = {plotStateValues}
+              type = {plotStateValues.type}
               onRemoveLabel={onRemoveLabel} labels={labels}/>
           </div>
           <Drawer classes={{ paper: classes.paper }} anchor="left" open={drawerState} className={classes.drawer} onClose={() => toggleDrawerState(false)}>
