@@ -58,7 +58,6 @@ function onPressSaveImage() {
   html2canvas(element, {
     windowWidth: element.scrollWidth,
     windowHeight: element.scrollHeight,
-    proxy: "localhost:3000"
   }).then(canvas => {
     downloadURI(canvas.toDataURL('image/png'));
   });
