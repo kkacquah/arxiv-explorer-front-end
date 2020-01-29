@@ -29,6 +29,8 @@ const useStyles = makeStyles(theme => ({
   iconButton: {
     paddingTop: 1,
     paddingBottom: 1,
+    marginBottom: 1,
+    marginTop: 1,
     paddingLeft: 8,
     marginLeft: 2,
     paddingRight: 8,
