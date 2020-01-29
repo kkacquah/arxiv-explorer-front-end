@@ -13,6 +13,7 @@ from '../../utils/plotOptions';
 import {
   useCookies
 } from 'react-cookie';
+import html2canvas from 'html2canvas';
 
 const useStyles = makeStyles(theme => ({
   body: {
@@ -45,6 +46,24 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
+function downloadURI(uri, name) {
+  var link = document.createElement("a");
+  link.download = name;
+  link.href = uri;
+  link.click();
+}
+
+function onPressSaveImage() {
+  const element = document.querySelector("#plot");
+  html2canvas(element, {
+    windowWidth: element.scrollWidth,
+    windowHeight: element.scrollHeight,
+    proxy: "localhost:3000"
+  }).then(canvas => {
+    downloadURI(canvas.toDataURL('image/png'));
+  });
+}
+
 export default function VizOptionsView(props) {
   const classes = useStyles();
   const [drawerState, toggleDrawerState] = useState(false);
@@ -62,8 +81,7 @@ export default function VizOptionsView(props) {
         <OntologySelectedMenu index={props.categoryIndex} onSelect={onSelectCategory} hintText={"Category"} options={plotOptions.CATEGORIES}/>
         </div>
         <div className={classes.buttons}>
-        <OntologyButton color={"#3C64B1"} buttonText={"Share Link"}/>
-        <OntologyButton color={"#373F41"} buttonText={"Save Image"} marginTop={10}/>
+        <OntologyButton color={"#3C64B1"} buttonText={"Save Image"} onPress={onPressSaveImage} marginTop={10}/>
         </div>
       </div>
   );

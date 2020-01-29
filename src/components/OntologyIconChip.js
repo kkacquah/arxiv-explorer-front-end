@@ -12,7 +12,10 @@ import {
 const useStyles = makeStyles(theme => ({
   chip: {
 
-    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 5,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -24,8 +27,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: 16,
   },
   iconButton: {
-    padding: 2,
-    marginLeft: 4,
+    paddingTop: 1,
+    paddingBottom: 1,
+    paddingLeft: 8,
+    marginLeft: 2,
+    paddingRight: 8,
   },
   text: {
     fontFamily: "Muli",
@@ -51,7 +57,7 @@ export default function OntologyIconChip(props) {
      <IconButton
      className={classes.iconButton}
      onClick={props.onPressClose}
-     children={<CloseIcon className={classes.closeIcon}/>}
+     children={<Typography className={classes.text}>×</Typography>}
      />
 
    </Box>);

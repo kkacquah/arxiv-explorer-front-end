@@ -26,6 +26,7 @@
     import {
       useCookies
     } from 'react-cookie';
+    import OntologyLoader from '../../../components/OntologyLoader'
 
     defaults.global.defaultFontFamily = "Muli";
 
@@ -60,10 +61,10 @@
       const data = {
         datasets: convertResponseMapToDataset(props.labels)
       };
-
+      console.log(![...props.labels.keys()].length);
 
       return (
-        <div className={classes.plotContainer}>
+        <div className={classes.plotContainer} id="plot">
           <div className={classes.plotHeader}>
           <Typography color="textSecondary" className={classes.title}>
             Interest Over Time
@@ -74,7 +75,14 @@
              onAddLabel = {props.onAddLabel}
               labels={props.labels}/>
           </div>
-              <Line data={data} options={plotOptions.getPlotOptions(props.type)} />
+          { /* Show loading animation if no labels have been loaded.
+            */
+            [...props.labels.keys()].length === 0 ?
+            <OntologyLoader/>
+            :
+          <Line data={data} options={plotOptions.getPlotOptions(props.type)} />
+          }
+
               </div>
       );
     }

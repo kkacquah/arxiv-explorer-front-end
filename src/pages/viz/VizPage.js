@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import OntologyAppBar from '../../components/OntologyAppBar'
 import OntologyErrorSnackBar from '../../components/OntologyErrorSnackbar'
+import OntologyLoader from '../../components/OntologyLoader'
 import VizOptionsView from './VizOptionsView'
 import VizPlot from './vizPagePlot/VizPlot'
 import {
@@ -35,6 +36,7 @@ import {
   useQueryParams
 } from 'use-query-params';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: 1200,
@@ -66,10 +68,10 @@ export default function VizPage(props) {
   const [labels, setLabels] = React.useState(new Map());
   const classes = useStyles();
   const [drawerState, toggleDrawerState] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   //HANDLE ERROR SNACKBAR
   const [snackbarOpen, toggleSnackbar] = React.useState(false);
   const onError = (error) => {
-    console.log(error);
     toggleSnackbar(true);
   }
   const onErrorClose = () => {
@@ -99,7 +101,9 @@ export default function VizPage(props) {
           _query
         );
       });
+      setIsLoading(false);
     }
+
     getDatapoints(labelKeys, psVals,
       onGetDatapointsSuccess,
       onError);
@@ -107,7 +111,10 @@ export default function VizPage(props) {
   }
   //check if there are any items in the query that are not in labelKeys
   let newLabels = difference(query.labelKeys, [...labels.keys()])
-  if (newLabels.length != 0) loadDatapoints(query);
+  if (newLabels.length != 0) {
+    if (!isLoading) setIsLoading(true);
+    loadDatapoints(query);
+  }
   const plotStateValues = plotOptions.getPlotStateValues(query);
 
   const addKey = (k, v, _query) => {
@@ -134,10 +141,9 @@ export default function VizPage(props) {
           pointArray: response.data.pointArray[labelName]
         },
         query);
+      setIsLoading(false);
     };
-
-
-
+    setIsLoading(true);
     getDatapoints(labelName, plotStateValues,
       onGetDatapointsSuccess,
       onError);
@@ -167,11 +173,13 @@ export default function VizPage(props) {
     <div className={classes.root}>
 
           <OntologyAppBar menu={true} onMenuPress={() => toggleDrawerState(true)}/>
-          <div className={classes.body}>
+          <div className={classes.body} id="plot">
             <VizPlot
+
               onError={onError} onAddLabel={onAddLabel}
               type = {plotStateValues.type}
               onRemoveLabel={onRemoveLabel} labels={labels}/>
+
           </div>
           <Drawer classes={{ paper: classes.paper }} anchor="left" open={drawerState} className={classes.drawer} onClose={() => toggleDrawerState(false)}>
           <VizOptionsView
