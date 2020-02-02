@@ -7,6 +7,10 @@ import {
 
 // A custom theme for this app
 const theme = createMuiTheme({
+  zIndex: {
+    appBar: 20000,
+    textField: 0
+  },
   palette: {
     default: {
       main:'#3C64B1',

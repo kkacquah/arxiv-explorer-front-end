@@ -6,6 +6,7 @@ import {
   makeStyles
 } from '@material-ui/core/styles';
 import OntologyErrorSnackbar from '../../components/OntologyErrorSnackbar'
+import OntologyFeedbackForm from '../../components/OntologyFeedbackForm'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 export default function HomePage(props) {
   const classes = useStyles();
   const [snackbarOpen, toggleSnackbar] = React.useState(false);
+  const [feedbackFormOpen, setFeedbackFormOpen] = React.useState(false);
   const onError = (error) => {
     console.log(error);
     toggleSnackbar(true);
@@ -49,10 +51,15 @@ export default function HomePage(props) {
     toggleSnackbar(false)
   };
 
+  const onOpenFeedback = () => setFeedbackFormOpen(true)
+  const onCloseFeedback = () => setFeedbackFormOpen(false)
 
   return (
     <div className={classes.root}>
-          <OntologyAppBar/>
+          <OntologyAppBar
+            onOpenFeedback={onOpenFeedback}
+
+          />
           <div className={classes.body}>
           <div className={classes.mainContainer}>
           <div className={classes.homeVisualizerPreviewContainer}>
@@ -64,6 +71,7 @@ export default function HomePage(props) {
           </div>
           </div>
           <OntologyErrorSnackbar open={snackbarOpen} onClose={onErrorClose}/>
+<OntologyFeedbackForm  onCloseFeedback={onCloseFeedback} visible={feedbackFormOpen}/>
           </div>
   );
 }

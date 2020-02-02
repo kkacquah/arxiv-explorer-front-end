@@ -41,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     padding: 5,
     borderWidth: 0,
     backgroundColor: '#ffffff',
-    flex: 4
+    flex: 4,
+    zIndex: 0
   },
   queryInputContainer: {
     marginTop: theme.spacing(3),
@@ -64,7 +65,8 @@ const useStyles = makeStyles(theme => ({
     color: '#373F41'
   },
   root: {
-    width: 500
+    width: 500,
+
   },
 }));
 

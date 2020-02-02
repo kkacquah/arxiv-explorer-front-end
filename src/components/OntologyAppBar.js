@@ -1,5 +1,6 @@
 import React from 'react';
 import OntologyTitle from './OntologyTitle';
+import OntologyFeedbackForm from './OntologyFeedbackForm';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -76,7 +77,7 @@ export default function OntologyAppBar(props) {
            >
              <Typography color="textSecondary" className={classes.socialItem}>Follow</Typography>
            </Button>
-          <Button ><Typography color="textSecondary" className={classes.menuItem}>Feedback</Typography></Button>
+           <Button onClick={props.onOpenFeedback}><Typography color="textSecondary" className={classes.menuItem}>Feedback</Typography></Button>
           <Button ><Typography color="textSecondary" className={classes.menuItem}>About</Typography></Button>
         </Toolbar>
       </AppBar>

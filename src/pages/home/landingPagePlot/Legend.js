@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   legendItem:{
     marginRight: 4,
     marginTop: 2,
-    marginBottom: 2
+    marginBottom: 2,
   },
   legendText:{
     fontFamily:"Muli",
@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
 function LegendItems(props) {
   const classes = useStyles();
   const legendItems = props.data.map((line) =>
-  (<Button
+  (
+    <Button
      variant="contained"
      className={classes.legendItem}
      size= 'small'
@@ -32,7 +33,8 @@ function LegendItems(props) {
      style={{backgroundColor:line.backgroundColor }}
    >
      <Typography color="textSecondary" className={classes.legendText}>{line.label}</Typography>
-   </Button>)
+   </Button>
+ )
   );
   return legendItems;
 }

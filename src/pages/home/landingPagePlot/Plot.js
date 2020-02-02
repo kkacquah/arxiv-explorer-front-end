@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   plotContainer:{
     background:"#ffffff",
     padding:25,
-    width: 520
+    width: 520,
   },
   title: {
     flexGrow: 1,
@@ -28,8 +28,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft:36
   },
   plotLegend:{
-    display: "flex",
-    flexWrap: "wrap"
+    zIndex:0,
   }
 }));
 export default function VisualizerPlot() {
@@ -40,7 +39,7 @@ export default function VisualizerPlot() {
       <Typography color="textSecondary" className={classes.title}>
         Neural networks take over other machine-learning methods
       </Typography>
-      <VisualizerLegend data={landingPageData.datasets}/>
+      <VisualizerLegend className={classes.plotLegend} data={landingPageData.datasets}/>
       </div>
           <Line data={landingPageData} options={plotOptions} />
           </div>
