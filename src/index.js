@@ -10,7 +10,8 @@ import {
   useLocation
 } from 'react-router-dom'
 
-
+//configure environment variables
+require('dotenv').config();
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

@@ -84,20 +84,9 @@ export default function LandingPageQueryField(props) {
     setPhrase(event.target.value);
   }
   const onPressSearch = () => {
-    const onSuccess = response => {
-      //push navigation to viz with response
-      const newState = {
-        labels: new Map()
-      };
-      newState.labels.set(phrase, {
-        color: getColor(phrase),
-        pointArray: response.data.pointArray[phrase]
-      });
-      history.push(`/viz?rangeIndex=0&typeIndex=0&categoryIndex=0&labelKeys=${phrase}`);
-    };
     const plotStateValues = plotOptions.getPlotStateValues(plotStateIndicies)
     //set initialization flag
-    getDatapoints(phrase, plotStateValues, onSuccess, props.onError);
+    history.push(`/viz?rangeIndex=0&typeIndex=0&categoryIndex=0&labelKeys=${phrase}`);
 
   }
 

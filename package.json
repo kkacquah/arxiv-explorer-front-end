@@ -19,6 +19,7 @@
     "axios": "^0.19.1",
     "chart.js": "^2.9.3",
     "clsx": "latest",
+    "dotenv": "^8.2.0",
     "html2canvas": "^1.0.0-rc.5",
     "qs": "^6.9.1",
     "react": "latest",
