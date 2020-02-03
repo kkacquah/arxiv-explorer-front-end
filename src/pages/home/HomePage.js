@@ -71,7 +71,10 @@ export default function HomePage(props) {
           </div>
           </div>
           <OntologyErrorSnackbar open={snackbarOpen} onClose={onErrorClose}/>
-<OntologyFeedbackForm  onCloseFeedback={onCloseFeedback} visible={feedbackFormOpen}/>
+<OntologyFeedbackForm
+  onError={onError}
+  onCloseFeedback={onCloseFeedback}
+  visible={feedbackFormOpen}/>
           </div>
   );
 }

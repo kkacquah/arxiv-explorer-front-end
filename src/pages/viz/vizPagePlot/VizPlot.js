@@ -64,7 +64,7 @@
       console.log(![...props.labels.keys()].length);
 
       return (
-        <div className={classes.plotContainer} id="plot">
+        <div className={classes.plotContainer} >
           <div className={classes.plotHeader}>
           <Typography color="textSecondary" className={classes.title}>
             Interest Over Time

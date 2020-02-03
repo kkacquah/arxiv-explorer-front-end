@@ -35,7 +35,7 @@ import {
   useQueryParam,
   useQueryParams
 } from 'use-query-params';
-
+import OntologyFeedbackForm from '../../components/OntologyFeedbackForm'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -71,6 +71,8 @@ export default function VizPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   //HANDLE ERROR SNACKBAR
   const [snackbarOpen, toggleSnackbar] = React.useState(false);
+  const [feedbackFormOpen, setFeedbackFormOpen] = React.useState(false);
+
   const onError = (error) => {
     toggleSnackbar(true);
   }
@@ -80,6 +82,9 @@ export default function VizPage(props) {
     setQuery(query);
     toggleSnackbar(false);
   }
+
+  const onOpenFeedback = () => setFeedbackFormOpen(true);
+  const onCloseFeedback = () => setFeedbackFormOpen(false);
 
   const [query, setQuery] = useQueryParams({
     categoryIndex: NumberParam,
@@ -164,6 +169,7 @@ export default function VizPage(props) {
     }
   }
 
+
   //remove label
   function onRemoveLabel(labelName) {
     deleteKey(labelName);
@@ -172,7 +178,7 @@ export default function VizPage(props) {
   return (
     <div className={classes.root}>
 
-          <OntologyAppBar menu={true} onMenuPress={() => toggleDrawerState(true)}/>
+          <OntologyAppBar onOpenFeedback={onOpenFeedback} menu={true} onMenuPress={() => toggleDrawerState(true)}/>
           <div className={classes.body} id="plot">
             <VizPlot
 
@@ -190,6 +196,10 @@ export default function VizPage(props) {
       </Drawer>
 
       <OntologyErrorSnackBar open={snackbarOpen} onClose={onErrorClose}/>
+      <OntologyFeedbackForm
+        onError={onError}
+        onCloseFeedback={onCloseFeedback}
+        visible={feedbackFormOpen}/>
       </div>
   );
 }
