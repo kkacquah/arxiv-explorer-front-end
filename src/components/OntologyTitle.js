@@ -6,21 +6,35 @@ import {
 
 const useStyles = makeStyles(theme => ({
   title: {
-    flexGrow: 1,
     fontFamily:"Lato",
     fontWeight:700,
     fontSize:24,
+    lineHeight:1,
     color:"#3C64B1",
-    marginBottom:10
   },
+  titleAlternate: {
+    color:"#737B7D",
+  },
+  titleContainer:{
+    margin:20,
+    display: "flex",
+    justifyContent:"center",
+    alignItems: "center",
+    flexDirection:"row",
+  }
 }));
 
 export default function OntologyTitle(props) {
   const classes = useStyles();
 
   return (
-    <Typography color="textPrimary" className={classes.title}>
-    ONTOLOGY
+    <div className={classes.titleContainer}>
+    <Typography color="textSecondary" className={`${classes.title} ${classes.titleAlternate}`}>
+    RESEARCH
     </Typography>
+    <Typography color="textPrimary" className={classes.title}>
+    TRENDS
+    </Typography>
+    </div>
   );
 }

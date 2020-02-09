@@ -51,6 +51,10 @@ const useStyles = makeStyles(theme => ({
     fontSize:24,
     color:theme.textColor
   },
+  toolbar:{
+    display: "flex",
+    justifyContent: "space-between"
+  }
 }));
 
 export default function OntologyAppBar(props) {
@@ -59,9 +63,10 @@ export default function OntologyAppBar(props) {
   return (
     <div>
       <AppBar  className={classes.appBar} position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
         {props.menu ?
           <div className={classes.hamburgerButtonContainer}>
+
           <IconButton
           onClick={props.onMenuPress}
           children={<MenuIcon  className={classes.menuIcon}/>}
@@ -69,6 +74,7 @@ export default function OntologyAppBar(props) {
           </div>
           :
           <OntologyTitle/>}
+          <div>
           <Button
              variant="contained"
              color="default"
@@ -79,6 +85,7 @@ export default function OntologyAppBar(props) {
            </Button>
            <Button onClick={props.onOpenFeedback}><Typography color="textSecondary" className={classes.menuItem}>Feedback</Typography></Button>
           <Button ><Typography color="textSecondary" className={classes.menuItem}>About</Typography></Button>
+          </div>
         </Toolbar>
       </AppBar>
     </div>
