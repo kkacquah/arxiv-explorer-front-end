@@ -73,10 +73,10 @@ const OntologyIconChipAdd = props => {
 
     React.useEffect(() => {
       // Bind the event listener
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("mouseup", handleClickOutside);
       return () => {
         // Unbind the event listener on clean up
-        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("mouseup", handleClickOutside);
       };
     });
   }
@@ -108,6 +108,7 @@ const OntologyIconChipAdd = props => {
   //If text is specified, return an ontology chip component
   //Other wise prompt a chip addition.
   return (<div
+    ref={chipRef}
     className={classes.chipContainer}
 
     >{
@@ -116,7 +117,6 @@ const OntologyIconChipAdd = props => {
      className={classes.chip}
      size= 'large'
      border={1}
-     ref={chipRef}
      onClick={onFocus}
    >
        <ContentEditable

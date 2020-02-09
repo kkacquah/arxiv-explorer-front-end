@@ -47,6 +47,21 @@
         fontSize: 32,
         color: theme.textColor
       },
+      prompt: {
+        flexGrow: 1,
+        fontFamily: "Muli",
+        fontWeight: 600,
+        fontSize: 40,
+        textAlign: "center",
+        color: "#a4a4a4"
+      },
+      promptContainer: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
       plotHeader: {
         marginLeft: 36
       },
@@ -55,6 +70,9 @@
         flexWrap: "wrap"
       }
     }));
+
+
+
     export default function VisualizerPlot(props) {
       const classes = useStyles();
       const [cookies] = useCookies(['categoryIndex', 'rangeIndex', 'stackedIndex']);
@@ -62,6 +80,16 @@
         datasets: convertResponseMapToDataset(props.labels)
       };
       console.log(![...props.labels.keys()].length);
+
+      function GetPlot() {
+        return ([...props.labels.keys()].length === 0 ?
+          <div className={classes.promptContainer}>
+          <Typography color="textSecondary" className={classes.prompt}>
+          Add a topic to explore its interest.
+        </Typography>
+      </div> :
+          <Line data={data} options={plotOptions.getPlotOptions(props.type)} />);
+      }
 
       return (
         <div className={classes.plotContainer} >
@@ -75,13 +103,16 @@
              onAddLabel = {props.onAddLabel}
               labels={props.labels}/>
           </div>
-          { /* Show loading animation if no labels have been loaded.
+          { props.isLoading?
+
+             /* Show loading animation if get datapoints call
+            is loading
             */
-            [...props.labels.keys()].length === 0 ?
+             //[...props.labels.keys()].length === 0 ?
             <OntologyLoader/>
             :
-          <Line data={data} options={plotOptions.getPlotOptions(props.type)} />
-          }
+          <GetPlot/>
+      }
 
               </div>
       );

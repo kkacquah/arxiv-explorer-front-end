@@ -108,7 +108,6 @@ export default function VizPage(props) {
       });
       setIsLoading(false);
     }
-
     getDatapoints(labelKeys, psVals,
       onGetDatapointsSuccess,
       onError);
@@ -181,7 +180,7 @@ export default function VizPage(props) {
           <OntologyAppBar onOpenFeedback={onOpenFeedback} menu={true} onMenuPress={() => toggleDrawerState(true)}/>
           <div className={classes.body} id="plot">
             <VizPlot
-
+              isLoading={isLoading}
               onError={onError} onAddLabel={onAddLabel}
               type = {plotStateValues.type}
               onRemoveLabel={onRemoveLabel} labels={labels}/>
