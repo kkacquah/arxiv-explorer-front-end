@@ -4,26 +4,12 @@ import {
 } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {
-  Input
-} from '@material-ui/core';
-import {
   TextField
 } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import OntologyButton from '../../components/OntologyButton'
-import {
-  getDatapoints
-} from '../../services/datapoints'
-import {
-  getColor
-} from '../../utils/lists'
 import {
   useHistory
 } from "react-router-dom";
-import plotOptions from '../../utils/plotOptions'
-import {
-  useCookies
-} from 'react-cookie';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -75,16 +61,10 @@ export default function LandingPageQueryField(props) {
   const history = useHistory();
 
   const [phrase, setPhrase] = React.useState("");
-  const [plotStateIndicies, ] = React.useState({
-    typeIndex: 0,
-    rangeIndex: 0,
-    categoryIndex: 0
-  });
   const setInputValue = (event) => {
     setPhrase(event.target.value);
   }
   const onPressSearch = () => {
-    const plotStateValues = plotOptions.getPlotStateValues(plotStateIndicies)
     //set initialization flag
     history.push(`/viz?rangeIndex=0&typeIndex=0&categoryIndex=0&labelKeys=${phrase}`);
 

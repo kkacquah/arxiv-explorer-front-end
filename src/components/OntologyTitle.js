@@ -29,10 +29,10 @@ export default function OntologyTitle(props) {
 
   return (
     <div className={classes.titleContainer}>
-    <Typography color="textSecondary" className={`${classes.title} ${classes.titleAlternate}`}>
+    <Typography color="textSecondary" style={{fontSize:props.fontSize}} className={`${classes.title} ${classes.titleAlternate}`}>
     RESEARCH
     </Typography>
-    <Typography color="textPrimary" className={classes.title}>
+    <Typography color="textPrimary" style={{fontSize:props.fontSize}} className={classes.title}>
     TRENDS
     </Typography>
     </div>

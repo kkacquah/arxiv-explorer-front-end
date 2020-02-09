@@ -1,6 +1,4 @@
-import React, {
-  useState
-} from 'react';
+import React from 'react';
 import {
   makeStyles
 } from '@material-ui/core/styles';
@@ -10,9 +8,6 @@ import OntologyButton from '../../components/OntologyButton'
 import
 plotOptions
 from '../../utils/plotOptions';
-import {
-  useCookies
-} from 'react-cookie';
 import html2canvas from 'html2canvas';
 
 const useStyles = makeStyles(theme => ({
@@ -46,26 +41,30 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function downloadURI(uri, name) {
-  var link = document.createElement("a");
-  link.download = name;
-  link.href = uri;
-  link.click();
-}
 
-function onPressSaveImage() {
-  const element = document.querySelector("#plot");
-  html2canvas(element, {
-    windowWidth: element.scrollWidth,
-    windowHeight: element.scrollHeight,
-  }).then(canvas => {
-    downloadURI(canvas.toDataURL('image/png'));
-  });
-}
 
 export default function VizOptionsView(props) {
+  function downloadURI(uri, name) {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.click();
+  }
+
+  function onPressSaveImage() {
+    const element = document.querySelector("#plot");
+    if (props.labels) {
+      html2canvas(element, {
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
+      }).then(canvas => {
+        downloadURI(canvas.toDataURL('image/png', props.labels.join("+") + "-ResearchTrends"));
+      });
+    } else {
+      props.onError();
+    }
+  }
   const classes = useStyles();
-  const [drawerState, toggleDrawerState] = useState(false);
 
   const onSelectCategory = (categoryIndex) => props.onSelect('categoryIndex', categoryIndex)
   const onSelectRange = (rangeIndex) => props.onSelect('rangeIndex', rangeIndex);
@@ -74,7 +73,7 @@ export default function VizOptionsView(props) {
   return (
     <div className={classes.body}>
     <div className={classes.header}>
-    <OntologyTitle/>
+    <OntologyTitle fontSize={18}/>
     <OntologySelectedMenu index={props.rangeIndex} onSelect={onSelectRange} hintText={"Range"} options={plotOptions.RANGES}/>
       <OntologySelectedMenu index={props.typeIndex} onSelect={onSelectType} hintText={"Type"} options={plotOptions.TYPES}/>
         <OntologySelectedMenu index={props.categoryIndex} onSelect={onSelectCategory} hintText={"Category"} options={plotOptions.CATEGORIES}/>

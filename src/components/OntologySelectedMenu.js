@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
     padding:10,
     height:"32px",
     margin:0,
-    height: "100%"
   },
   text:{
     fontFamily:"Muli",

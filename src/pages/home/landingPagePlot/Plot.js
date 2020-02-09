@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import VisualizerLegend from './Legend'
 import  plotOptions  from './options'
 import  landingPageData from './data'
-import  { convertResponseMapToDataset}  from '../../../utils/timeSeries'
 import { makeStyles } from '@material-ui/core/styles';
 import { defaults } from 'react-chartjs-2';
 

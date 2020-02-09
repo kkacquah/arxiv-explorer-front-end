@@ -1,8 +1,7 @@
 import React from 'react';
 import OntologyIconChipAdd from '../../../components/OntologyIconChipAdd'
 import {
-  getCounter,
-  getChipColor
+  getCounter
 } from '../../../utils/lists'
 
 import {
@@ -29,8 +28,7 @@ export default function VisualizerLegend(props) {
   function getLegendItem(labelName) {
     var labelColor = props.labels.get(labelName) ? props.labels.get(labelName).color : null;
     const onCloseHandler = () => props.onRemoveLabel(labelName);
-    return ( < OntologyIconChipAdd color = "#d8d8d8"
-      text = {
+    return ( < OntologyIconChipAdd text = {
         labelName
       }
       color = {

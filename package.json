@@ -29,6 +29,8 @@
     "react-contenteditable": "^3.3.3",
     "react-cookie": "^4.0.3",
     "react-dom": "latest",
+    "react-https-redirect": "^1.1.0",
+    "react-input-autosize": "^2.2.2",
     "react-loader": "^2.4.6",
     "react-onclickoutside": "^6.9.0",
     "react-router": "^5.1.2",

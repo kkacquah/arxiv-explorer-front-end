@@ -1,14 +1,13 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import OntologyIconChip from './OntologyIconChip';
-import AddIcon from '@material-ui/icons/Add';
 import {
   IconButton
 } from '@material-ui/core';
 import {
   makeStyles
 } from '@material-ui/core/styles';
-import ContentEditable from "react-contenteditable";
+import AutosizeInput from 'react-input-autosize';
 import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
   chip: {
@@ -43,6 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   text: {
+    outline: 'none',
     fontFamily: "Muli",
     fontWeight: 600,
     fontSize: 16,
@@ -119,10 +119,9 @@ const OntologyIconChipAdd = props => {
      border={1}
      onClick={onFocus}
    >
-       <ContentEditable
-      style={{outline: 'none'}}
-            html={focused ? innerText : "Add Topic"}
-             className={classes.text}
+       <AutosizeInput
+            value={focused ? innerText : "Add Topic"}
+             inputClassName={classes.text}
              onChange={handleChange} // handle innerHTML change
 
            />

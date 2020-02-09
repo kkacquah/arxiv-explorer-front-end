@@ -4,10 +4,6 @@ import {
 } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
-import MenuIcon from '@material-ui/icons/Menu';
-import {
-  useCookies
-} from 'react-cookie';
 
 const useStyles = makeStyles(theme => ({
   button: {

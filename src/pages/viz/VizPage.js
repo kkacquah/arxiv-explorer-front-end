@@ -3,21 +3,14 @@ import React, {
 } from 'react';
 import OntologyAppBar from '../../components/OntologyAppBar'
 import OntologyErrorSnackBar from '../../components/OntologyErrorSnackbar'
-import OntologyLoader from '../../components/OntologyLoader'
 import VizOptionsView from './VizOptionsView'
-import VizPlot from './vizPagePlot/VizPlot'
+import VizPlotContainer from './vizPagePlot/VizPlotContainer'
 import {
   Drawer
 } from '@material-ui/core';
 import {
   makeStyles
 } from '@material-ui/core/styles';
-import {
-  useLocation
-} from 'react-router-dom'
-import {
-  useCookies
-} from 'react-cookie';
 import
 plotOptions
 from '../../utils/plotOptions'
@@ -27,12 +20,10 @@ import {
 import {
   getColor,
   difference,
-  removeItem
+  ListParam
 } from '../../utils/lists'
 import {
-  ArrayParam,
   NumberParam,
-  useQueryParam,
   useQueryParams
 } from 'use-query-params';
 import OntologyFeedbackForm from '../../components/OntologyFeedbackForm'
@@ -61,7 +52,6 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function VizPage(props) {
-  let location = useLocation();
   //forceUpdate react hook
   const [, forceUpdate] = React.useReducer(x => x + 1, 0);
   //get initial state from routing
@@ -90,32 +80,34 @@ export default function VizPage(props) {
     categoryIndex: NumberParam,
     rangeIndex: NumberParam,
     typeIndex: NumberParam,
-    labelKeys: ArrayParam,
+    labelKeys: ListParam,
   });
   //HELPERS
   //get labelkeys for a list
   function loadDatapoints(_query) {
-    let labelKeys = _query.labelKeys;
+    const labelKeys = _query.labelKeys;
     const psVals = plotOptions.getPlotStateValues(_query);
     const onGetDatapointsSuccess = (response) => {
-      Object.keys(response.data.pointArray).map(labelName => {
+      Object.keys(response.data.pointArray).map(labelName =>
         addKey(labelName, {
             color: getColor(labelName), //get old color for labelName
             pointArray: response.data.pointArray[labelName] //get new pointarray from response
           },
           _query
-        );
-      });
+        ));
       setIsLoading(false);
     }
+
     getDatapoints(labelKeys, psVals,
       onGetDatapointsSuccess,
       onError);
 
   }
   //check if there are any items in the query that are not in labelKeys
-  let newLabels = difference(query.labelKeys, [...labels.keys()])
-  if (newLabels.length != 0) {
+  let newLabels = difference(query.labelKeys, [...labels.keys()]);
+  //If there are new labels to add and the state is not loading
+  //call load datapoints
+  if (newLabels.length !== 0 && !isLoading) {
     if (!isLoading) setIsLoading(true);
     loadDatapoints(query);
   }
@@ -157,11 +149,10 @@ export default function VizPage(props) {
   //get a new dataset for every label
   function onSelect(key, index) {
     //map point array keys to values
-    let labelKeys = [...labels.keys()];
     query[key] = index;
     //if the change was in the type, we dont need to reload
     //datapoints, just rerender the state
-    if (key == "type") {
+    if (key === "type") {
       forceUpdate();
     } else {
       loadDatapoints(query);
@@ -179,7 +170,7 @@ export default function VizPage(props) {
 
           <OntologyAppBar onOpenFeedback={onOpenFeedback} menu={true} onMenuPress={() => toggleDrawerState(true)}/>
           <div className={classes.body} id="plot">
-            <VizPlot
+            <VizPlotContainer
               isLoading={isLoading}
               onError={onError} onAddLabel={onAddLabel}
               type = {plotStateValues.type}
@@ -188,6 +179,8 @@ export default function VizPage(props) {
           </div>
           <Drawer classes={{ paper: classes.paper }} anchor="left" open={drawerState} className={classes.drawer} onClose={() => toggleDrawerState(false)}>
           <VizOptionsView
+            labels={query.labelKeys}
+            onError={onError}
             rangeIndex={query.rangeIndex}
             typeIndex={query.typeIndex}
             categoryIndex={query.categoryIndex}

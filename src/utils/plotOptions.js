@@ -35,7 +35,7 @@ export default {
     }
   },
   getPlotOptions: (type) => {
-    let stacked = type == 'Stacked Chart';
+    let stacked = type === 'Stacked Chart';
     return {
       legend: {
         display: false
