@@ -44,9 +44,9 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function VizOptionsView(props) {
-  function downloadURI(uri, name) {
+  function downloadURI(uri) {
     var link = document.createElement("a");
-    link.download = name;
+    link.download = props.labels.join("+") + "-ResearchTrends";
     link.href = uri;
     link.click();
   }
@@ -58,7 +58,7 @@ export default function VizOptionsView(props) {
         windowWidth: element.scrollWidth,
         windowHeight: element.scrollHeight,
       }).then(canvas => {
-        downloadURI(canvas.toDataURL('image/png', props.labels.join("+") + "-ResearchTrends"));
+        downloadURI(canvas.toDataURL('image/png'));
       });
     } else {
       props.onError();
