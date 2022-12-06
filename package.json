@@ -23,7 +23,7 @@
     "clsx": "latest",
     "dotenv": "^8.2.0",
     "html2canvas": "^1.0.0-rc.5",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "latest",
     "react-chartjs-2": "^2.8.0",
     "react-contenteditable": "^3.3.3",
